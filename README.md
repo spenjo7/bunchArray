@@ -31,7 +31,8 @@ This JavaScript function allows elemements of an Array to be 'bunched' together 
     --   const defaultLogicFunc = ( x, y, i ) => { return true }
 
 # Code Examples:
-/*
+
+
     bunchArray([1,2,3,4,5,6]) 
         // returns: [21]
             /// No bunching into sections occurs
@@ -40,9 +41,9 @@ This JavaScript function allows elemements of an Array to be 'bunched' together 
         // returns: [	[1, 2], [3, 4], [5, 6]	]
             /// Bunches when the INDEX value is a multiple of 2 
 
-bunchArray([1,2,3,4,5,6,7,8,9,10,11,12,13], (x,y,i,r) => y.length < Math.ceil(r.length/3) )
-	// returns: [ [1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13]	]
-		/// Bunches into an 'nth' of the overall array size  
+	bunchArray([1,2,3,4,5,6,7,8,9,10,11,12,13], (x,y,i,r) => y.length < Math.ceil(r.length/3) )
+		// returns: [ [1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13]	]
+			/// Bunches into an 'nth' of the overall array size  
  
     bunchArray([1,2,3,4,5,6], (x) => x%5 )
         // returns [    [1, 2, 3, 4], [5, 6]    ]
@@ -55,4 +56,3 @@ bunchArray([1,2,3,4,5,6,7,8,9,10,11,12,13], (x,y,i,r) => y.length < Math.ceil(r.
     bunchArray(['see','spot','run', 'he', 'is', 'so', 'very', 'fast' ], (x,y,i) => /^[^s]/i.test(x) )
         // returns: [   ["see"], ["spot", "run", "he", "is"], ["so", "very", "fast"] ]
             /// Bunches on words that start with an 's'   
-*/
