@@ -6,7 +6,7 @@
 2020-09-30: [v1.0] Original Creation (stable)
 */
 
-let bunchArray = (arr = [], logicFunc = null ) => { 
+const bunchArray = (arr = [], logicFunc = null ) => { 
     logicFunc = logicFunc?? ( () => { return true } )
     
     let output = []
