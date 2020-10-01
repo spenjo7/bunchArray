@@ -1,5 +1,3 @@
-# bunchArray #
-
 # Quick Description:
 This JavaScript function allows elemements of an Array to be 'bunched' together into 'sections' based on a 'Logic function' which is passed in as an argument. 
   For example: Turning [1,2,3,4] into [ [1,2], [3,4] ] 
