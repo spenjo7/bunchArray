@@ -23,7 +23,7 @@ let bunchArray = (arr = [], logicFunc = null, formatFunc = null, finalFunc = nul
     return finalFunc(output.flat(1))
 }
 
-// EXAMPLES: //
+/* //EXAMPLES: 
 console.log(
 
 	bunchArray([1,2,3,4,5,6]) 
@@ -44,3 +44,4 @@ console.log(
 		// returns: "1<>2@3<>4@5<>6"
 
 )
+*/
