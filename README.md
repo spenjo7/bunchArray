@@ -24,8 +24,7 @@ This JavaScript function allows elemements of an Array to be 'bunched' together 
     -- The Current Element from the Array
     -- The Current Section
     -- The Index of the Current Element from the Original Array
-    -- The Original Array; this can be used for 'self' type comparisons
-    	--- 
+    -- The Original Array; this can be used for 'Self' type comparisons such as splitting the array into fractions
     
   - The Default Logic function always returns true
     --   const defaultLogicFunc = ( x, y, i ) => { return true }
