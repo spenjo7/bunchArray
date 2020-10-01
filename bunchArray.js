@@ -1,26 +1,29 @@
-let bunchArray = (arr = [], logicFunc = null, formatFunc = null, finalFunc = null ) => {
-    const defaultLogicFunc = ( x, y, i ) => { return true }
-    const defaultFormatFunc = ( z, c, i ) => { return c == null? z : c + z }
-    const defaultFinalFunc = ( arr ) => { return arr }    
+/*
+2020-10-01: [v1.1]  Removing the formating options
+    -- The sole focus should be splitting data; formating can be handled elsewhere.
+    -- Updated the Examples and added some new ones
 
-    logicFunc = logicFunc?? defaultLogicFunc
-    formatFunc = formatFunc?? defaultFormatFunc 
-    finalFunc = finalFunc??  defaultFinalFunc
+2020-09-30: [v1.0] Original Creation (stable)
+*/
 
+let bunchArray = (arr = [], logicFunc = null ) => { 
+    logicFunc = logicFunc?? ( () => { return true } )
+    
     let output = []
-    let current = null
+    let section = null
 
     arr.forEach( (el,ind) => {
-        if(!current){ current = el } 
-        else if( logicFunc(el,current,ind) ){
-             current = formatFunc( el, current, ind )   
+        if(!section){ section = [el] } 
+        else if( logicFunc( el, section, ind ) ){
+            section.push(el) 
         } else {
-            output.push(formatFunc(current))
-            current = el
+            output.push(section)
+            section = [el]
         }
     })
-    output.push(formatFunc(current,null))
-    return finalFunc(output.flat(1))
+    
+    output.push(section) // need to shore up the last section
+    return output
 }
 
 /* //EXAMPLES: 
@@ -28,20 +31,18 @@ console.log(
 
 	bunchArray([1,2,3,4,5,6]) 
 		// returns:	[21]
+            /// No bunching into sections occurs
 ,
-	bunchArray([1,2,3,4,5,6], (x,y,i)=>i%2 )
+	bunchArray([1,2,3,4,5,6], (x,y,i) => i%2 )
 		// returns:	[3, 7, 11] 
-
-,
-	bunchArray([1,2,3,4,5,6], (x,y,i)=>i%2, (z,c,i)=>c?[c,z]:[z] )
-		// returns:	[	[1, 2], [3, 4], [5, 6]	]
-
-,
-	bunchArray([1,2,3,4,5,6], (x,y,i)=>i%2, (z,c,i)=>c?[c,z]:[z], (r)=> r.map( el => el.join('<>') ) )
-		// returns: [ "1<>2", "3<>4", "5<>6" ] 
-,	
-	bunchArray([1,2,3,4,5,6], (x,y,i)=>i%2, (z,c,i)=>c?[c,z]:[z], (r)=> r.map( el => el.join('<>') ).join('@') )
-		// returns: "1<>2@3<>4@5<>6"
-
+            /// Bunches when the INDEX value is a multiple of 2 
+, 
+    bunchArray([1,2,3,4,5,6], (x,y,i) => x%5 )
+        // returns [    [1, 2, 3, 4], [5, 6]    ]
+            /// Bunches when the ELEMENT value is a multiple of 5
+, 
+    bunchArray(['see','spot','run', 'he', 'is', 'so', 'very', 'fast' ], (x,y,i) => (x.length + y.join().length) < 8 )  
+        // returns: [    ["see", "spot"], ["run", "he"], ["is", "so"], ["very"], ["fast"]    ]
+            /// Bunches if adding the current element to the section would exceed 8 characters
 )
 */
